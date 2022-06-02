@@ -22,6 +22,7 @@ class Main extends React.Component {
     this.state = {
       card: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       theme: createTheme(),
+      view: "Main",
     };
   }
 
@@ -31,9 +32,8 @@ class Main extends React.Component {
         <CssBaseline />
         <AppBar position="relative">
           <Toolbar>
-            <CameraIcon sx={{ mr: 2 }} />
             <Typography variant="h6" color="inherit" noWrap>
-              Album layout
+              Pizza Tracker
             </Typography>
           </Toolbar>
         </AppBar>
@@ -54,7 +54,7 @@ class Main extends React.Component {
                 color="text.primary"
                 gutterBottom
               >
-                Album layout
+                Pizza Tracker
               </Typography>
               <Typography
                 variant="h5"
@@ -62,9 +62,10 @@ class Main extends React.Component {
                 color="text.secondary"
                 paragraph
               >
-                Something short and leading about the collection below—its
-                contents, the creator, etc. Make it short and sweet, but not too
-                short so folks don&apos;t simply skip over it entirely.
+                There’s nothing cookie-cutter about Pizza Tracker. Not our
+                pizzas. Not our people. And definitely not the way we live life.
+                Around here, we don’t settle for anything less than food we’re
+                proud to serve.
               </Typography>
               <Stack
                 sx={{ pt: 4 }}
@@ -72,8 +73,8 @@ class Main extends React.Component {
                 spacing={2}
                 justifyContent="center"
               >
-                <Button variant="contained">Main call to action</Button>
-                <Button variant="outlined">Secondary action</Button>
+                <Button variant="contained">Login</Button>
+                <Button variant="outlined">Join us Now!</Button>
               </Stack>
             </Container>
           </Box>
@@ -100,15 +101,12 @@ class Main extends React.Component {
                     />
                     <CardContent sx={{ flexGrow: 1 }}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        Heading
+                        Pizza Name
                       </Typography>
-                      <Typography>
-                        This is a media card. You can use this section to
-                        describe the content.
-                      </Typography>
+                      <Typography>Pizza Contents</Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small">View</Button>
+                      <Button size="small">Order</Button>
                       <Button size="small">Edit</Button>
                     </CardActions>
                   </Card>
