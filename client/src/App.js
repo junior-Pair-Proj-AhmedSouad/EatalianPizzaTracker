@@ -30,6 +30,7 @@ class App extends React.Component {
       console.log(res.data);
       this.setState({ data: res.data });
     });
+    console.log('hiiiiiiiii');
   }
 
   Clicked(e) {
@@ -65,9 +66,15 @@ class App extends React.Component {
         <Mainlogged changeView={this.changeView} onePizza={this.onePizza} />
       );
     } else if (view === "Admin") {
-      return <MainAdmin />;
+      return (
+        <MainAdmin
+          changeView={this.changeView}
+          onePizza={this.onePizza}
+          getData={this.getData}
+        />
+      );
     } else if (view === "SignIn") {
-      return <SignIn />;
+      return <SignIn changeView={this.changeView} onePizza={this.onePizza} />;
     }
   }
 

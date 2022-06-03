@@ -1,7 +1,7 @@
 const express = require("express");
 
 const db = require("../database");
-const Pizza = require("../database/pizza")
+const Pizza = require("../database/pizza");
 const User = require("../database/user");
 const app = express();
 const PORT = 3001;
@@ -37,9 +37,18 @@ app.post("/api/pizza", (req, res) => {
 
 app.put("/api/pizza/pop", (req, res) => {});
 
-app.delete("/api/pizza/:_id", (req, res) => {
-  console.log(req.params, req.body._id);
-  db.deletePizza(req.body._id);
+app.delete("/api/pizza/:pizza_id", function (req, res) {
+  console.log(req.params.pizza_id);
+  let id = req.params.pizza_id;
+  Pizza.remove(
+    {
+      _id: id,
+    },
+    function (err) {
+      if (err) res.send(err);
+      else res.send("Successfully! pizza has been Deleted.");
+    }
+  );
 });
 
 // app.delete("/api/employee/:employee_id", function (req, res) {

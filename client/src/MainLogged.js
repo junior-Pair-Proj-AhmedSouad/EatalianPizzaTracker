@@ -115,7 +115,9 @@ class Mainlogged extends React.Component {
                       >
                         {card.name}
                       </Typography>
-                      <Typography>{card.description}</Typography>
+                      <Typography>
+                        {card.description} only for {card.price} $ !
+                      </Typography>
                     </CardContent>
                     <CardActions>
                       <Button size="small">Order</Button>

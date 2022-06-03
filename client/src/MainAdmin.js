@@ -25,17 +25,49 @@ class MainAdmin extends React.Component {
       theme: createTheme(),
       view: "Main",
       current: [],
+      name: "",
+      price: 0,
+      description: "",
+      photo: "",
     };
   }
 
   componentDidMount() {
-    return axios.get("http://localhost:3001/api/pizza").then((res) => {
+    this.dataGetter();
+  }
+
+  dataGetter() {
+    axios.get("http://localhost:3001/api/pizza").then((res) => {
       console.log(res.data);
       this.setState({ data: res.data });
     });
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState !== this.state) {
+  //     console.log("pizza added!");
+  //   }
+  // }
+
+  deletePizza(e) {
+    console.log(e);
+    axios.delete(`http://localhost:3001/api/pizza/${e._id}`);
+    this.dataGetter();
+  }
+
+  addPizza(e) {
+    axios.post("http://localhost:3001/api/pizza", {
+      name: this.state.name,
+      price: this.state.price,
+      description: this.state.description,
+      photo: this.state.photo,
+    });
+    e.preventDefault();
+    this.dataGetter();
+  }
+
   render() {
+    console.log(this.state);
     return (
       <ThemeProvider theme={this.state.theme}>
         <CssBaseline />
@@ -83,6 +115,45 @@ class MainAdmin extends React.Component {
               </Typography>
             </Container>
           </Box>
+          <div class="create">
+            <div class="create-editor">
+              <h2>Add Pizza</h2>
+              <form>
+                <input
+                  class="create-input"
+                  type="text"
+                  placeholder="Name"
+                  onChange={(e) => this.setState({ name: e.target.value })}
+                ></input>
+                <input
+                  class="create-input"
+                  type="text"
+                  placeholder="Price"
+                  onChange={(e) => this.setState({ price: e.target.value })}
+                ></input>
+                <input
+                  class="create-input"
+                  type="text"
+                  placeholder="Image URL"
+                  onChange={(e) => this.setState({ photo: e.target.value })}
+                ></input>
+                <textarea
+                  class="create-body-textarea"
+                  placeholder="Description"
+                  onChange={(e) =>
+                    this.setState({ description: e.target.value })
+                  }
+                ></textarea>
+                <button
+                  onClick={(e) => this.addPizza(e)}
+                  class="create-submit-button"
+                  type="submit"
+                >
+                  Save pizza
+                </button>
+              </form>
+            </div>
+          </div>
           <Container sx={{ py: 8 }} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
@@ -115,7 +186,9 @@ class MainAdmin extends React.Component {
                       >
                         {card.name}
                       </Typography>
-                      <Typography>{card.description}</Typography>
+                      <Typography>
+                        {card.description} only for {card.price} $ !
+                      </Typography>
                     </CardContent>
                     <CardActions>
                       <Button
@@ -124,7 +197,12 @@ class MainAdmin extends React.Component {
                       >
                         Update
                       </Button>
-                      <Button size="small">Delete</Button>
+                      <Button
+                        onClick={(e) => this.deletePizza(card)}
+                        size="small"
+                      >
+                        Delete
+                      </Button>
                     </CardActions>
                   </Card>
                 </Grid>

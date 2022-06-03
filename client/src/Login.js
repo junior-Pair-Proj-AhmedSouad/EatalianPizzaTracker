@@ -121,7 +121,7 @@ class SignIn extends React.Component {
                 onClick={() => {
                   this.AddUser();
                   this.setState({ name: "", email: "", password: "" });
-                  this.props.changeView("MainAdmin");
+                  this.props.changeView("Admin");
                 }}
               >
                 Sign In
