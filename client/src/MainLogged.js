@@ -17,7 +17,7 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 
-class Main extends React.Component {
+class Mainlogged extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,10 +29,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    this.getData();
-  }
-  getData() {
-    axios.get("http://localhost:3001/api/pizza").then((res) => {
+    return axios.get("http://localhost:3001/api/pizza").then((res) => {
       console.log(res.data);
       this.setState({ data: res.data });
     });
@@ -74,7 +71,7 @@ class Main extends React.Component {
                 Pizza Tracker
               </Typography>
               <Typography
-                variant="h4"
+                variant="h5"
                 align="center"
                 color="text.secondary"
                 paragraph
@@ -84,25 +81,6 @@ class Main extends React.Component {
                 Around here, we don’t settle for anything less than food we’re
                 proud to serve.
               </Typography>
-              <Stack
-                sx={{ pt: 4 }}
-                direction="row"
-                spacing={2}
-                justifyContent="center"
-              >
-                <Button
-                  variant="contained"
-                  onClick={() => this.props.changeView("SignIn")}
-                >
-                  Login
-                </Button>
-                <Button
-                  variant="outlined"
-                  onClick={() => this.props.changeView("SignUp")}
-                >
-                  Join us Now!
-                </Button>
-              </Stack>
             </Container>
           </Box>
           <Container sx={{ py: 8 }} maxWidth="md">
@@ -139,6 +117,15 @@ class Main extends React.Component {
                       </Typography>
                       <Typography>{card.description}</Typography>
                     </CardContent>
+                    <CardActions>
+                      <Button size="small">Order</Button>
+                      <Button
+                        size="small"
+                        onClick={() => this.props.onePizza(card)}
+                      >
+                        Rate
+                      </Button>
+                    </CardActions>
                   </Card>
                 </Grid>
               ))}
@@ -164,4 +151,4 @@ class Main extends React.Component {
     );
   }
 }
-export default Main;
+export default Mainlogged;

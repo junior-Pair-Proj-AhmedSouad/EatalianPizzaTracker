@@ -5,8 +5,8 @@ const pizzaSchema = new mongoose.Schema({
   photo: String,
   name: String,
   price: Number,
-  popularity: String,
-  description:String,
+  popularity: Number,
+  description: String,
 });
 const Pizza = mongoose.model("Pizza", pizzaSchema);
 module.exports = Pizza;

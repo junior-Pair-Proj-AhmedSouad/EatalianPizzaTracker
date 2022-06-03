@@ -1,8 +1,8 @@
-const { db } = require("./index.js");
-const Pizza = require("./pizza.js");
-const sampleData = require("../data.json");
-const insertSamplePizza = function () {
-  Pizza.create(sampleData)
+//USER SAMPLE DATA
+const User = require("./user.js");
+const sampleDataUser = require("../dataUser.json");
+const insertSampleUser = function () {
+    User.create(sampleDataUser)
     .then(() => {
       console.log("Database seeded successfully");
     })
@@ -13,4 +13,4 @@ const insertSamplePizza = function () {
       db.close();
     });
 };
-insertSamplePizza();
+// insertSampleUser();

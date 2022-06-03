@@ -1,9 +1,16 @@
 const express = require("express");
 
 const db = require("../database");
-
+const Pizza = require("../database/pizza")
+const User = require("../database/user");
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
+var cors = require("cors");
+app.use(cors());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,18 +35,82 @@ app.post("/api/pizza", (req, res) => {
   res.json(req.body);
 });
 
-app.delete("/api/employee/:employee_id", function (req, res) {
-  console.log(req.params.employee_id);
-  let id = req.params.employee_id;
-  Employee.remove(
+app.put("/api/pizza/pop", (req, res) => {});
+
+app.delete("/api/pizza/:_id", (req, res) => {
+  console.log(req.params, req.body._id);
+  db.deletePizza(req.body._id);
+});
+
+// app.delete("/api/employee/:employee_id", function (req, res) {
+//   console.log(req.params.employee_id);
+//   let id = req.params.employee_id;
+//   Employee.remove(
+//     {
+//       _id: id,
+//     },
+//     function (err) {
+//       if (err) res.send(err);
+//       else res.send("Successfully! Employee has been Deleted.");
+//     }
+//   );
+// });
+
+//UPDATE POPULARITY
+//UPDATE ONE PIZZA
+app.put("/api/pizza/:pizza_id", function (req, res) {
+  // create mongose method to update a existing record into collection
+  let id = req.params.pizza_id;
+  var data = {
+    popularity: req.body.popularity,
+  };
+  // save the pizza's data
+  Pizza.findByIdAndUpdate(id, data, function (err, pizza) {
+    if (err) throw err;
+
+    res.send("Successfully! pizza updated  ");
+  });
+});
+//UPDATE ONE PIZZA
+app.put("/api/pizza/:pizza_id", function (req, res) {
+  // create mongose method to update a existing record into collection
+  let id = req.params.pizza_id;
+  var data = {
+    photo: req.body.photo,
+    name: req.body.name,
+    price: req.body.price,
+    popularity: req.body.popularity,
+    description: req.body.description,
+  };
+  // save the pizza's data
+  Pizza.findByIdAndUpdate(id, data, function (err, pizza) {
+    if (err) throw err;
+
+    res.send("Successfully! pizza updated  ");
+  });
+});
+
+//USER PART
+//POST A NEW USER
+app.post("/api/user", function (req, res) {
+  // create mongose method to create a new record into collection
+  User.create(
     {
-      _id: id,
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      role: req.body.role,
     },
-    function (err) {
-      if (err) res.send(err);
-      else res.send("Successfully! Employee has been Deleted.");
+    function (err, results) {
+      err ? res.status(500).send(err) : res.status(200).json(results);
     }
   );
+});
+//GET USERS DATA FROM DATABASE USERS
+app.get("/api/user", (req, res) => {
+  db.getAllUsers((err, results) => {
+    err ? res.status(500).send(err) : res.status(200).json(results);
+  });
 });
 
 app.listen(PORT, () => {
