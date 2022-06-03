@@ -5,9 +5,9 @@ mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
   name: String,
-  email: String,
+  email: { type: String, unique: true },
   password: String,
-  role: { type: String, default: "User" },
+  role: { type: String, default: "User", enum: ["User", "Admin"] },
 });
 
 const User = mongoose.model("User", userSchema);

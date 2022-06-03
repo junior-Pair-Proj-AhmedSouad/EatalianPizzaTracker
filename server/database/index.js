@@ -24,6 +24,13 @@ const getAllUsers = function (cb) {
   });
 };
 
+//GET ONE USER
+const getOneUserByEmail = function (email, cb) {
+  User.findOne({ email: email }, (err, res) => {
+    err ? cb(err, null) : cb(null, res);
+  });
+};
+
 //ADD PIZZA TO DATABASE
 const addPizza = function (photo, name, price, popularity, description) {
   return Pizza.create({
@@ -52,4 +59,5 @@ module.exports = {
   // updatePopularity,
   getAllUsers,
   deletePizza,
+  getOneUserByEmail,
 };

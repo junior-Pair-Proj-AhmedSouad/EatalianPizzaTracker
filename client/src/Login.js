@@ -22,20 +22,28 @@ class SignIn extends React.Component {
       email: "",
       password: "",
       theme: createTheme(),
+      errMessage: "",
     };
   }
-  AddUser() {
+  login() {
+    console.log(this.state.email, this.state.password);
     axios
-      .post("http://localhost:3001/api/user/", {
-        name: this.state.name,
+      .post("http://localhost:3001/api/auth/login", {
         email: this.state.email,
         password: this.state.password,
       })
-      .then((res) => console.log(res));
+      .then((res) => {
+        console.log(res, "res");
+
+        this.props.changeView("Admin");
+      })
+      .catch((e) => {
+        console.log(e.response);
+        this.setState({ errMessage: e.response.data.message });
+      });
   }
 
   render() {
-    console.log(this.state);
     return (
       <ThemeProvider theme={this.state.theme}>
         <Container component="main" maxWidth="xs">
@@ -62,21 +70,6 @@ class SignIn extends React.Component {
             </Typography>
             <Box component="form" noValidate sx={{ mt: 3 }}>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={12}>
-                  <TextField
-                    style={{ color: "blue", borderBlockColor: "blue" }}
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="First & last name"
-                    autoFocus
-                    onChange={(e) => {
-                      this.setState({ name: e.target.value });
-                    }}
-                  />
-                </Grid>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -119,9 +112,7 @@ class SignIn extends React.Component {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 onClick={() => {
-                  this.AddUser();
-                  this.setState({ name: "", email: "", password: "" });
-                  this.props.changeView("Admin");
+                  this.login();
                 }}
               >
                 Sign In
@@ -135,7 +126,7 @@ class SignIn extends React.Component {
               </Grid>
             </Box>
           </Box>
-          <login sx={{ mt: 5 }} />
+          {/* <login sx={{ mt: 5 }} /> */}
         </Container>
       </ThemeProvider>
     );
