@@ -68,7 +68,7 @@ class Mainlogged extends React.Component {
                 color="text.primary"
                 gutterBottom
               >
-                Pizza Tracker
+                Eatalian Pizza Tracker
               </Typography>
               <Typography
                 variant="h5"

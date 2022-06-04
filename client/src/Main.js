@@ -51,7 +51,7 @@ class Main extends React.Component {
                 noWrap
                 fontFamily="Sans-Serif"
               >
-                Pizza Tracker
+                Eatalian Pizza Tracker
               </Typography>
               <h6>Order on 50 696 158</h6>
             </div>

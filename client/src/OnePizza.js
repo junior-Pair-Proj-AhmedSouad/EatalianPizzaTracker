@@ -28,7 +28,7 @@ export default class OnePizza extends Component {
       <div>
         <div>
           <div className="nav">
-            <span className="logo">Pizza Tracker</span>
+            <span className="logo">Eatalian Pizza Tracker</span>
             <span onClick={() => this.props.changeView("Mainlogged")}>
               See all Pizzas
             </span>

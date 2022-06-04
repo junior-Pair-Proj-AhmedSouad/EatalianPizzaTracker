@@ -79,7 +79,7 @@ class MainAdmin extends React.Component {
               noWrap
               fontFamily="Sans-Serif"
             >
-              Pizza Tracker
+              Eatalian Pizza Tracker
             </Typography>
           </Toolbar>
         </AppBar>
