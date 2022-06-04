@@ -89,7 +89,6 @@ class Mainlogged extends React.Component {
               {this.state.data.map((card) => (
                 <Grid item key={card} xs={12} sm={6} md={4}>
                   <Card
-                    style={{ color: "red" }}
                     sx={{
                       height: "100%",
                       display: "flex",
@@ -99,34 +98,28 @@ class Mainlogged extends React.Component {
                     <CardMedia
                       onClick={() => this.props.onePizza(card)}
                       component="img"
-                      sx={{
-                        // 16:9
-                        pt: "56.25%",
-                      }}
                       image={card.photo}
+                      height="140"
                       alt="random"
                     />
                     <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
+                      <p
+                        className="text-primary bold fs-4"
                         onClick={() => this.props.onePizza(card)}
                       >
                         {card.name}
-                      </Typography>
+                      </p>
                       <Typography>
                         {card.description} only for {card.price} $ !
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small">Order</Button>
-                      <Button
-                        size="small"
+                      <button
                         onClick={() => this.props.onePizza(card)}
+                        className={"btn btn-primary btn-sm"}
                       >
-                        Rate
-                      </Button>
+                        <i className="fas" /> Rate
+                      </button>
                     </CardActions>
                   </Card>
                 </Grid>

@@ -44,14 +44,17 @@ class Main extends React.Component {
         <CssBaseline />
         <AppBar position="relative">
           <Toolbar>
-            <Typography
-              variant="h6"
-              color="Black"
-              noWrap
-              fontFamily="Sans-Serif"
-            >
-              Pizza Tracker
-            </Typography>
+            <div>
+              <Typography
+                variant="h6"
+                color="white"
+                noWrap
+                fontFamily="Sans-Serif"
+              >
+                Pizza Tracker
+              </Typography>
+              <h6>Order on 50 696 158</h6>
+            </div>
           </Toolbar>
         </AppBar>
         <main>
@@ -73,17 +76,12 @@ class Main extends React.Component {
               >
                 Pizza Tracker
               </Typography>
-              <Typography
-                variant="h4"
-                align="center"
-                color="text.secondary"
-                paragraph
-              >
+              <p className="fs-5 text-center">
                 There’s nothing cookie-cutter about Pizza Tracker. Not our
                 pizzas. Not our people. And definitely not the way we live life.
                 Around here, we don’t settle for anything less than food we’re
                 proud to serve.
-              </Typography>
+              </p>
               <Stack
                 sx={{ pt: 4 }}
                 direction="row"
@@ -111,7 +109,6 @@ class Main extends React.Component {
               {this.state.data.map((card) => (
                 <Grid item key={card} xs={12} sm={6} md={4}>
                   <Card
-                    style={{ color: "red" }}
                     sx={{
                       height: "100%",
                       display: "flex",
@@ -121,24 +118,35 @@ class Main extends React.Component {
                     <CardMedia
                       onClick={() => this.props.onePizza(card)}
                       component="img"
-                      sx={{
-                        // 16:9
-                        pt: "56.25%",
-                      }}
                       image={card.photo}
+                      height="140"
                       alt="random"
                     />
                     <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
+                      <p
+                        className="text-primary bold fs-4"
                         onClick={() => this.props.onePizza(card)}
                       >
                         {card.name}
+                      </p>
+                      <Typography>
+                        {card.description} only for {card.price} $ !
                       </Typography>
-                      <Typography>{card.description}  only for {card.price} $ !</Typography>
                     </CardContent>
+                    {/* <CardActions> */}
+                    {/* <Button
+                        size="small"
+                        onClick={() => this.props.onePizza(card)}
+                      >
+                        Update
+                      </Button> */}
+                    {/* <button
+                        onClick={(e) => this.deletePizza(card)}
+                        className={"btn btn-danger btn-sm"}
+                      >
+                        <i className="fas fa-trash" /> Delete
+                      </button>
+                    </CardActions> */}
                   </Card>
                 </Grid>
               ))}

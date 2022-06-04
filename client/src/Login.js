@@ -26,7 +26,7 @@ class SignIn extends React.Component {
     };
   }
   login() {
-    console.log(this.state.email, this.state.password);
+    console.log(this.state.errMessage);
     axios
       .post("http://localhost:3001/api/auth/login", {
         email: this.state.email,
@@ -34,7 +34,7 @@ class SignIn extends React.Component {
       })
       .then((res) => {
         console.log(res, "res");
-
+        localStorage.setItem("user", res.data);
         this.props.changeView("Admin");
       })
       .catch((e) => {
@@ -46,15 +46,14 @@ class SignIn extends React.Component {
   render() {
     return (
       <ThemeProvider theme={this.state.theme}>
-        <Container component="main" maxWidth="xs">
+        <Container sx={{ py: 8 }} maxWidth="md">
           <CssBaseline />
           <Box
             style={{
-              backgroundImage: `url(${"https://www.pizzarettes.nl/wp-content/uploads/2013/09/pizza-background.png"})`,
+              // backgroundImage: `url(${"https://www.pizzarettes.nl/wp-content/uploads/2013/09/pizza-background.png"})`,
               backgroundRepeat: "no-repeat",
-              width: "900px",
-              height: "650px",
             }}
+            className="border p-5 rounded"
             sx={{
               marginTop: 10,
               display: "flex",

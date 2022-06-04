@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../src/OnePizza.css";
 import axios from "axios";
+import Container from "@mui/material/Container";
 
 export default class OnePizza extends Component {
   constructor(props) {
@@ -28,23 +29,24 @@ export default class OnePizza extends Component {
         <div>
           <div className="nav">
             <span className="logo">Pizza Tracker</span>
-            <span onClick={() => this.props.changeView("Main")}>
+            <span onClick={() => this.props.changeView("Mainlogged")}>
               See all Pizzas
             </span>
           </div>
 
           <div className="main"></div>
         </div>
-        <div className="post">
+        <div className="post border">
           <h1 className="post-title">{this.props.data.name}</h1>
+          <hr />
           <div className="post-byline">
             <span className="post-byline-author" style={{ color: "red" }}>
               {this.state.pop} USERS LOVED THIS PIZZA!
-            </span>
+            </span>{" "}
             <input onClick={() => this.counter()} id="heart" type="checkbox" />
             <label for="heart">❤</label>
           </div>
-          <img src={this.props.data.photo} className="post-image" />
+          <img src={this.props.data.photo} className="post-image rounded" />
           <p style={{ whiteSpace: "pre-line" }}>
             {this.props.data.description}
           </p>

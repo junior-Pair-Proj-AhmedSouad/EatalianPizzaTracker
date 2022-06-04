@@ -3,6 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import CameraIcon from "@mui/icons-material/PhotoCamera";
 import Card from "@mui/material/Card";
+import Container from "@mui/material/Container";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -12,7 +13,6 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
@@ -115,52 +115,54 @@ class MainAdmin extends React.Component {
               </Typography>
             </Container>
           </Box>
-          <div class="create">
-            <div class="create-editor">
-              <h2>Add Pizza</h2>
-              <form>
-                <input
-                  class="create-input"
-                  type="text"
-                  placeholder="Name"
-                  onChange={(e) => this.setState({ name: e.target.value })}
-                ></input>
-                <input
-                  class="create-input"
-                  type="text"
-                  placeholder="Price"
-                  onChange={(e) => this.setState({ price: e.target.value })}
-                ></input>
-                <input
-                  class="create-input"
-                  type="text"
-                  placeholder="Image URL"
-                  onChange={(e) => this.setState({ photo: e.target.value })}
-                ></input>
-                <textarea
-                  class="create-body-textarea"
-                  placeholder="Description"
-                  onChange={(e) =>
-                    this.setState({ description: e.target.value })
-                  }
-                ></textarea>
-                <button
-                  onClick={(e) => this.addPizza(e)}
-                  class="create-submit-button"
-                  type="submit"
-                >
-                  Save pizza
-                </button>
-              </form>
+
+          <Container sx={{ py: 8 }} maxWidth="md">
+            <div class="">
+              <div class="border rounded p-4">
+                <h2 className="mb-5">Add Pizza</h2>
+                <form>
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    placeholder="Name"
+                    onChange={(e) => this.setState({ name: e.target.value })}
+                  ></input>
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    placeholder="Price"
+                    onChange={(e) => this.setState({ price: e.target.value })}
+                  ></input>
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    placeholder="Image URL"
+                    onChange={(e) => this.setState({ photo: e.target.value })}
+                  ></input>
+                  <textarea
+                    class="form-control mb-3"
+                    placeholder="Description"
+                    onChange={(e) =>
+                      this.setState({ description: e.target.value })
+                    }
+                  ></textarea>
+                  <button
+                    onClick={(e) => this.addPizza(e)}
+                    class="btn btn-primary"
+                    type="submit"
+                  >
+                    <i className="fas fa-plus-circle" /> Add pizza
+                  </button>
+                </form>
+              </div>
             </div>
-          </div>
+          </Container>
           <Container sx={{ py: 8 }} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
               {this.state.data.map((card) => (
                 <Grid item key={card} xs={12} sm={6} md={4}>
                   <Card
-                    style={{ color: "red" }}
                     sx={{
                       height: "100%",
                       display: "flex",
@@ -170,39 +172,35 @@ class MainAdmin extends React.Component {
                     <CardMedia
                       onClick={() => this.props.onePizza(card)}
                       component="img"
-                      sx={{
-                        // 16:9
-                        pt: "56.25%",
-                      }}
                       image={card.photo}
+                      height="140"
                       alt="random"
                     />
                     <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="h2"
+                      <p
+                        className="text-primary bold fs-4"
+
                         onClick={() => this.props.onePizza(card)}
                       >
                         {card.name}
-                      </Typography>
+                      </p>
                       <Typography>
                         {card.description} only for {card.price} $ !
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button
+                      {/* <Button
                         size="small"
                         onClick={() => this.props.onePizza(card)}
                       >
                         Update
-                      </Button>
-                      <Button
+                      </Button> */}
+                      <button
                         onClick={(e) => this.deletePizza(card)}
-                        size="small"
+                        className={"btn btn-danger btn-sm"}
                       >
-                        Delete
-                      </Button>
+                        <i className="fas fa-trash" /> Delete
+                      </button>
                     </CardActions>
                   </Card>
                 </Grid>

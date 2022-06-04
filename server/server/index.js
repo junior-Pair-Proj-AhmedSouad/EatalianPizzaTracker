@@ -117,12 +117,20 @@ app.post("/api/user", function (req, res) {
 });
 
 app.post("/api/auth/login", async (req, res) => {
-  if (!req.body.password || !req.body.email)
-    return res.status(401).send({ message: "missing credentials" });
+  if (!req.body.password || !req.body.email){
+    res.status(401).send({ message: "missing credentials" });
+  }
   db.getOneUserByEmail(req.body.email, (err, user) => {
-    if (err) return res.send({ message: "Email does not exist" });
-    if (req.body.password === user.password) {
-      res.status(200).send(user);
+    if (err) {
+      alert('Email does not exist')
+      return res.send({ message: "Email does not exist" });
+    }
+    if (user) {
+      console.log(user.password, '!!!!!!!!!!');
+      if (req.body.password === user.password) {
+        
+        res.status(200).send(user);
+      }
     } else {
       res.status(401).send({ message: "Wrong password" });
     }
